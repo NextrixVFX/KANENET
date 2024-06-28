@@ -3,6 +3,8 @@
 
 # Attacks:
 - UDP - Float64 Data Packet
+- TCP - Float64 Data Packet
+- POST - Float64 Data Packet
 - More Coming...
 
 # Features
@@ -12,7 +14,7 @@
 - Server side DDoS
 - Local+VPS
 
-# Attack Features
+# Attack Features [TCP/UDP]
 - IP
 - PORT
 - TRIES
