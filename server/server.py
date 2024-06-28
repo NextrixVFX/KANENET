@@ -29,6 +29,12 @@ class server:
             case "UDP":
               self.commands.udp(server, data)
               sleep(0.5)
+            case "TCP":
+              self.commands.tcp(server, data)
+              sleep(0.5)
+            case "POST":
+              self.commands.post(server, data)
+              sleep(0.5)
             case "PING":
               self.commands.ping(server, data)
               sleep(0.5)

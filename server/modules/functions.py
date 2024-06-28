@@ -38,7 +38,7 @@ def clear() -> None:
 def splash(data: list[str, str]) -> str:
   # data -> [USERNAME, RANK]
   screen: str = f"""{CLEAR}
-  KANENET v0.1.0 - nextrixvfx
+  KANENET v0.1.1 - nextrixvfx
   Welcome: {data[0]}
   Rank: {data[1]}
   \nType: help"""
@@ -47,7 +47,9 @@ def splash(data: list[str, str]) -> str:
 def helpText() -> str:
   help: str = f"""{CLEAR}
   Attacks:
-  \tudp - Performs UDP Attack w/ float64 data [ 1 GIGABIT CAPABLE ]
+  \tudp - Performs UDP Attack w/ float64 data [ 3100 Max Size ]
+  \ttcp - Performs TCP Attack w/ float64 data (Target's port has to be OPEN!) [ 5000 Max Size? Maybe? ]
+  \tpost - Performs POST Attack w/ custom data (Used for backends)
 
   Etc:
   \tping - Responds Pong!
