@@ -38,7 +38,7 @@ def clear() -> None:
 def splash(data: list[str, str]) -> str:
   # data -> [USERNAME, RANK]
   screen: str = f"""{CLEAR}
-  KANENET v0.1.1 - nextrixvfx
+  KANENET v0.1.2 - nextrixvfx
   Welcome: {data[0]}
   Rank: {data[1]}
   \nType: help"""

