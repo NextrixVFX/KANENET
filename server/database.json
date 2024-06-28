@@ -1,0 +1,11 @@
+{
+  "nextrix": {
+    "password": "123",
+    "rank": "owner"
+  },
+  
+  "user123": {
+    "password": "111",
+    "rank": "user"
+  }
+}
