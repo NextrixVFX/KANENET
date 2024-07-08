@@ -29,6 +29,7 @@
 - Botnet support
 - More Optimizations
 - RCE Script
+- C# / V Rewrite?
 
 # Requirements
 - 4GB+ RAM (8GB-16GB Recommended)
