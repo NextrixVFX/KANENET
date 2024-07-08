@@ -1,7 +1,7 @@
 # KANENET
 - 1GBPS+ Server/Client DoS Panel
 
-# Attacks:
+# Attacks
 - UDP - Float64 Data Packet
 - TCP - Float64 Data Packet
 - POST - Float64 Data Packet
@@ -24,6 +24,11 @@
 - SEND DELAY
 - PACKET SIZE
 - THREADS
+
+# TODO
+- Botnet support
+- More Optimizations
+- RCE Script
 
 # Requirements
 - 4GB+ RAM (8GB-16GB Recommended)
