@@ -1,5 +1,5 @@
 # KANENET
-- 1GBPS+ Server/Client DoS Panel
+- 1GBPS+ Server/Client DDoS Panel
 
 # Attacks
 - UDP - Float64 Data Packet
