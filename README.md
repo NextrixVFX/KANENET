@@ -2,9 +2,9 @@
 - 1GBPS+ Server/Client DDoS Panel
 
 # Attacks
-- UDP - Float64 Data Packet
-- TCP - Float64 Data Packet
-- POST - Float64 Data Packet
+- UDP
+- TCP
+- POST
 - More Coming...
 
 # Features
